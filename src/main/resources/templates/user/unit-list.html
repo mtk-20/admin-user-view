@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Hello User</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css"
+        th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+</head>
+
+<body>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Unit Code</th>
+    <th>Unit Name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="u : ${units}">
+    <td th:text="${u.unitCode}"></td>
+    <td th:text="${u.unitName}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+
+</html>
