@@ -2,6 +2,7 @@ package com.example.admin_user_views.service.impl;
 
 import com.example.admin_user_views.dto.UserRequest;
 import com.example.admin_user_views.entity.User;
+import com.example.admin_user_views.exception.ConflictException;
 import com.example.admin_user_views.exception.NotFoundException;
 import com.example.admin_user_views.repository.UserRepo;
 import com.example.admin_user_views.service.UserService;
@@ -18,7 +19,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void createUser(UserRequest request) {
         User user = new User();
-        user.setUserName(request.getUserName());
+        if (repo.existsByUserName(request.getUserName())) {
+            throw new ConflictException("User Name Already Exists.");
+        } else {
+            user.setUserName(request.getUserName());
+        }
 //        user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setPassword(request.getPassword());
         user.setRoleUser(request.getRoleUser());

@@ -28,7 +28,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<?> handleGetUser(@PathVariable("id") Long id) {
         User user = service.getUserById(id);
-        log.info("User Id {} retrieved", id);
+        log.info("User Id {} fetched", id);
         return ResponseEntity.ok().body(ApiResponse.success(HttpStatus.OK, user));
     }
 }

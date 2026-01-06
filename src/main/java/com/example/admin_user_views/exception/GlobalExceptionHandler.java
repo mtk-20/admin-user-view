@@ -13,4 +13,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<?>> handleNotFoundException(NotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiResponse.error(HttpStatus.NOT_FOUND, e.getMessage()));
     }
+
+    @ExceptionHandler(ConflictException.class)
+    public ResponseEntity<ApiResponse<?>> handleConflictException(ConflictException e) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ApiResponse.error(HttpStatus.CONFLICT, e.getMessage()));
+    }
 }
