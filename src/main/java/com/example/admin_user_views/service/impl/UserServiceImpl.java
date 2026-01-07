@@ -9,6 +9,8 @@ import com.example.admin_user_views.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -34,4 +36,10 @@ public class UserServiceImpl implements UserService {
     public User getUserById(Long id) {
         return repo.findById(id).orElseThrow(() -> new NotFoundException("Id Not Found!"));
     }
+
+    @Override
+    public List<User> getAll() {
+        return repo.findAll();
+    }
+
 }

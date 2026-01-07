@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -30,5 +32,11 @@ public class UserController {
         User user = service.getUserById(id);
         log.info("User Id {} fetched", id);
         return ResponseEntity.ok().body(ApiResponse.success(HttpStatus.OK, user));
+    }
+
+    @GetMapping
+    public ResponseEntity<?> handleGetALl() {
+        List<User> user = service.getAll();
+        return ResponseEntity.ok().body(ApiResponse.success(HttpStatus.FOUND, user));
     }
 }
