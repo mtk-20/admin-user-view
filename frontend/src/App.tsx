@@ -7,26 +7,39 @@ import type { User } from "./types/User";
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const res = await getUsers();
-        setUsers(res.data);
+        console.log("FULL RESPONSE:", res);
+        console.log("RESPONSE DATA:", res.data);
+        console.log("USERS ARRAY:", res.data.result);
+        setUsers(res.data.result);
       } catch (error) {
         console.error("Failed to fetch users", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchUsers();
   }, []);
 
+  if (loading) return <p>Loading...</p>;
+
   return (
     <div>
-      <h1>Users</h1>
+      <h1>User List</h1>
+
+      {users.length === 0 && <p>No users found</p>}
+
       <ul>
-        {users.map((u) => (
-          <li key={u.id}>{u.username}</li>
+        {users.map((user) => (
+          <li key={user.id}>
+            <b>{user.userName}</b> — {user.roleUser}
+          </li>
         ))}
       </ul>
     </div>

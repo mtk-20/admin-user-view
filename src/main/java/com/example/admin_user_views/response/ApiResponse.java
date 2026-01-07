@@ -13,10 +13,10 @@ public class ApiResponse<T> {
     private HttpStatus errorCode;
     private boolean success;
     private String message;
-    private T data;
+    private T result;
 
-    public static <T> ApiResponse<T> success(HttpStatus errorCode, T data) {
-        return new ApiResponse<>(errorCode, true, "Success.",  data);
+    public static <T> ApiResponse<T> success(HttpStatus errorCode, T result) {
+        return new ApiResponse<>(errorCode, true, "Success.",  result);
     }
 
     public static <T> ApiResponse<T> error(HttpStatus errorCode, String message) {
